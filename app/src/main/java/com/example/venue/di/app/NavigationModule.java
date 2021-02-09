@@ -13,7 +13,7 @@ public class NavigationModule {
 
     @Singleton
     @Provides
-    AuthorizationRouter provideCommonCalculatorRouter(){
+    AuthorizationRouter provideCommonCalculatorRouter() {
         return new AuthorizationRouterImpl();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.venue.di.app;
 
-import com.example.venue.data.network.backendmodel.BackendModelApi;
+import com.example.venue.data.network.backendmodel.AuthorizationApi;
 import com.example.venue.data.network.backendmodel.BackendModelNetworkService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,7 +21,7 @@ public class RestModule {
 
     @Singleton
     @Provides
-    BackendModelApi provideWeatherApi(BackendModelNetworkService weatherNetworkService) {
-        return weatherNetworkService.getBackendModelApi();
+    AuthorizationApi provideWeatherApi(BackendModelNetworkService weatherNetworkService) {
+        return weatherNetworkService.getAuthorizationApi();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.venue.data.network.backendmodel;
 
-import com.example.venue.data.repositories.VerificationCodeRepository;
+import com.example.venue.data.repositories.auth.AuthorizationRepository;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -11,20 +11,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BackendModelNetworkService implements BackendModelApiProvider {
 
-    private BackendModelApi backendModelApi;
+    private final AuthorizationApi authorizationApi;
 
     @Inject
-    public BackendModelNetworkService(Gson gson) {
+    public BackendModelNetworkService(Gson gson) { //TODO В di закинуть
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(VerificationCodeRepository.BASE_URL)
+                .baseUrl(AuthorizationRepository.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        backendModelApi = retrofit.create(BackendModelApi.class);
+       // authorizationApi = retrofit.create(AuthorizationApi.class);
+        authorizationApi = new AuthorizationApiMock();
     }
 
     @Override
-    public BackendModelApi getBackendModelApi() {
-        return backendModelApi;
+    public AuthorizationApi getAuthorizationApi() {
+        return authorizationApi;
     }
 }

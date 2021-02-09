@@ -12,7 +12,7 @@ public class BackendModel {
     private String name;
 
     @SerializedName("weather")
-    private ArrayList<WeatherItem> weather = new ArrayList<WeatherItem>();
+    private final ArrayList<WeatherItem> weather = new ArrayList<WeatherItem>();
 
     @SerializedName("main")
     private Main main;

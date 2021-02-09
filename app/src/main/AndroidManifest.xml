@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -14,9 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Venue">
-        <activity android:name=".presentation.inputemail.InputEmailActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible">
+        <activity android:name=".presentation.verificationcode.VerificationCodeActivity">
 
+        </activity>
+        <activity
+            android:name=".presentation.inputemail.InputEmailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
