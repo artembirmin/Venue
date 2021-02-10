@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.example.venue.domain.inputemail.InputEmailInteractor;
 import com.example.venue.models.SendCodeRequest;
+import com.example.venue.presentation.base.BasePresenter;
 import com.example.venue.presentation.routers.AuthorizationRouter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

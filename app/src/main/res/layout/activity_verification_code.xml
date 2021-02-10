@@ -9,21 +9,16 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="200dp"/>
 
-    <com.github.gongw.VerifyCodeView
+    <EditText
+        android:id="@+id/verificationCodeView"
         android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="42dp"
-        app:vcTextColor="#b63b21"
-        app:vcTextCount="4"
-        app:vcTextSize="36sp"
-        app:vcDividerWidth="8dp"
-        app:vcWrapper="centerLine"
-        app:vcWrapperColor="#313335"
-        app:vcNextWrapperColor="#b63b21"
-        app:vcWrapperStrokeWidth="2dp" />
-
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:textSize="34sp"/>
 
 
 </LinearLayout>

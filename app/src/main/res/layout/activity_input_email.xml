@@ -29,7 +29,6 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="Welcome! :0"
-            android:textColor="#232323"
             android:textSize="36sp" />
 
         <com.google.android.material.textfield.TextInputLayout

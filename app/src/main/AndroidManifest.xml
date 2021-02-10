@@ -13,12 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Venue">
-        <activity android:name=".presentation.verificationcode.VerificationCodeActivity">
+        <activity android:name=".presentation.verificationcode.VerificationCodeActivity"
+            android:windowSoftInputMode="stateVisible">
 
         </activity>
         <activity
-            android:name=".presentation.inputemail.InputEmailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:name=".presentation.inputemail.InputEmailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

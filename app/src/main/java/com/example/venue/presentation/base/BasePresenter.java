@@ -1,4 +1,4 @@
-package com.example.venue.presentation.inputemail;
+package com.example.venue.presentation.base;
 
 import androidx.annotation.CallSuper;
 
