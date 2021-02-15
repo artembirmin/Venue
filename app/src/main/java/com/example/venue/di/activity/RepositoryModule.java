@@ -1,8 +1,8 @@
 package com.example.venue.di.activity;
 
-import com.example.venue.data.network.backendmodel.BackendModelApi;
-import com.example.venue.data.repositories.VerificationCodeRepository;
-import com.example.venue.data.repositories.VerificationCodeRepositoryImpl;
+import com.example.venue.data.network.backendmodel.AuthorizationApi;
+import com.example.venue.data.repositories.auth.AuthorizationRepository;
+import com.example.venue.data.repositories.auth.AuthorizationRepositoryImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,7 +12,7 @@ public class RepositoryModule {
 
     @PerActivity
     @Provides
-    VerificationCodeRepository provideWeatherApiRepository(BackendModelApi weatherApi){
-        return new VerificationCodeRepositoryImpl(weatherApi);
+    AuthorizationRepository provideWeatherApiRepository(AuthorizationApi weatherApi) {
+        return new AuthorizationRepositoryImpl(weatherApi);
     }
 }

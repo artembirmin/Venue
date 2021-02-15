@@ -10,8 +10,19 @@ import androidx.room.PrimaryKey;
 import java.util.Objects;
 
 @Entity
-public class DataBaseModel implements Parcelable{
+public class DataBaseModel implements Parcelable {
 
+    public static final Creator<DataBaseModel> CREATOR = new Creator<DataBaseModel>() {
+        @Override
+        public DataBaseModel createFromParcel(Parcel in) {
+            return new DataBaseModel(in);
+        }
+
+        @Override
+        public DataBaseModel[] newArray(int size) {
+            return new DataBaseModel[size];
+        }
+    };
     @PrimaryKey
     @NonNull
     public String id;
@@ -37,18 +48,6 @@ public class DataBaseModel implements Parcelable{
         expression = in.readString();
         answer = in.readString();
     }
-
-    public static final Creator<DataBaseModel> CREATOR = new Creator<DataBaseModel>() {
-        @Override
-        public DataBaseModel createFromParcel(Parcel in) {
-            return new DataBaseModel(in);
-        }
-
-        @Override
-        public DataBaseModel[] newArray(int size) {
-            return new DataBaseModel[size];
-        }
-    };
 
     @NonNull
     public String getId() {

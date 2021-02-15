@@ -1,20 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     tools:context=".presentation.inputemail.InputEmailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/connectingStatus"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/red_900"
+            android:text="Ожидание соединения..." />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp" />
+            android:layout_height="240dp" >
+
+            <ImageView
+                android:id="@+id/coffeeIc"
+                android:layout_width="wrap_content"
+                android:layout_height="257dp"
+                app:srcCompat="@drawable/coffee" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="Welcome! :0"
+            android:textSize="36sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/emailTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
@@ -23,7 +51,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailEditText"
+                android:id="@+id/inputEmailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoComplete|textEmailAddress"
@@ -31,10 +59,11 @@
                 android:textSize="24sp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/continueButton"
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="54dp"
                 android:layout_gravity="center_horizontal|bottom"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="0dp"
                 android:text="@string/continue_btn"
                 app:cornerRadius="200dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,4 +74,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
