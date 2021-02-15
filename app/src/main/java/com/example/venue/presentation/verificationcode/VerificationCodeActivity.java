@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.venue.R;
-import com.github.gongw.VerifyCodeView;
 
 public class VerificationCodeActivity extends AppCompatActivity
         implements VerificationCodeView {
@@ -20,11 +19,12 @@ public class VerificationCodeActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verification_code);
+        setContentView(R.layout.auth_activity_verification_code);
         verificationCodeView = findViewById(R.id.verificationCodeView);
         verificationCodeView.setFocusable(true);
         showSoftKeyboard(verificationCodeView);
     }
+
     public void showSoftKeyboard(View view) {
         if(view.requestFocus()){
             InputMethodManager imm =(InputMethodManager)

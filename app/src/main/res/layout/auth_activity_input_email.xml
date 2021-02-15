@@ -11,19 +11,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/connectingStatus"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/red_900"
+            android:text="Ожидание соединения..." />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="240dp" >
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/coffeeIc"
                 android:layout_width="wrap_content"
                 android:layout_height="257dp"
                 app:srcCompat="@drawable/coffee" />
         </FrameLayout>
 
         <TextView
-            android:id="@+id/WelcomeTextView"
+            android:id="@+id/welcomeTextView"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:fontFamily="sans-serif-light"
@@ -42,7 +51,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailTextInputEditText"
+                android:id="@+id/inputEmailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoComplete|textEmailAddress"

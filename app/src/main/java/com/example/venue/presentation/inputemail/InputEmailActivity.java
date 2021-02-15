@@ -1,19 +1,16 @@
 package com.example.venue.presentation.inputemail;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.venue.App;
 import com.example.venue.R;
@@ -40,44 +37,61 @@ public class InputEmailActivity extends BaseActivity
     TextInputLayout textInputLayout;
     TextInputEditText emailEditText;
     Button continueButton;
+    TextView connect; //FIXME Имя сделай
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //TODO Красоту навести
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_email);
+        setContentView(R.layout.auth_activity_input_email);
         buildActivityComponentAndInject();
         presenter.attachView(this);
-        emailEditText = findViewById(R.id.emailTextInputEditText);
-        textInputLayout = findViewById(R.id.emailTextInputLayout);
-        continueButton = findViewById(R.id.continueButton);
+        findViews();
+        addDisposable(App.getInstance().getNetworkChangeReciever().getBehaviorSubject().subscribe(b -> {
+            if (b)
+                connect.setVisibility(TextView.INVISIBLE);
+            else connect.setVisibility(TextView.VISIBLE);
+        }));
+
+
         continueButton.setOnClickListener(v -> {
             String email = Objects.requireNonNull(emailEditText.getText()).toString();
-            if(emailPattern.matcher(email).matches()){
+            boolean verificationResult = emailVerification(email);
+            if (verificationResult) {
                 textInputLayout.setErrorEnabled(false);
                 presenter.onContinueButtonClick(email);
-
             } else {
-                emailEditText.setError("Oshibka");
-                showSnackbar();
+                emailEditText.setError("Error");
                 textInputLayout.setErrorEnabled(true);
             }
         });
-        emailEditText.setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                Log.d(TAG, "onKey: enter");
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        emailEditText.setOnKeyListener(this::onEnterClick);
 
-            }
-            return true;
-        });
+    }
+
+    private boolean onEnterClick(View v, int keyCode, KeyEvent keyEvent) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            Log.d(TAG, "onKey: enter");
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+        return true;
+    }
+
+    private boolean emailVerification(String email) {
+        return emailPattern.matcher(email).matches();
+    }
+
+    private void findViews() {
+        emailEditText = findViewById(R.id.inputEmailEditText);
+        textInputLayout = findViewById(R.id.emailTextInputLayout);
+        continueButton = findViewById(R.id.continueButton);
+        connect = findViewById(R.id.connectingStatus);
     }
 
     private void showSnackbar() {
-
-        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), "Text", Snackbar.LENGTH_LONG);
+        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), "Text", Snackbar.LENGTH_SHORT);
         View view = snack.getView();
-        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
         params.gravity = Gravity.TOP;
         view.setLayoutParams(params);
         snack.show();
@@ -88,16 +102,6 @@ public class InputEmailActivity extends BaseActivity
                 .appComponent(App.getInstance().getAppComponent())
                 .inputEmailModule(new InputEmailModule(this))
                 .build().inject(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override
