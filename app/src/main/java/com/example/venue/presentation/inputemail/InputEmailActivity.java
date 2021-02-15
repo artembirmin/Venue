@@ -52,7 +52,6 @@ public class InputEmailActivity extends BaseActivity
             else connect.setVisibility(TextView.VISIBLE);
         }));
 
-
         continueButton.setOnClickListener(v -> {
             String email = Objects.requireNonNull(emailEditText.getText()).toString();
             boolean verificationResult = emailVerification(email);
