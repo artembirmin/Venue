@@ -1,8 +1,10 @@
-package com.example.venue;
+package com.example.venue.auth;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.example.venue.R;
 import com.example.venue.presentation.inputemail.InputEmailActivity;
 
 import org.junit.Rule;
@@ -29,12 +31,14 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class InputEmailActivityTest {
 
+    InputEmailPage inputEmailPage = new InputEmailPage();
+
     @Rule
     public ActivityScenarioRule<InputEmailActivity> activityRule =
             new ActivityScenarioRule<InputEmailActivity>(InputEmailActivity.class);
 
     private void checkPermanentViews() {
-        onView(withId(R.id.coffeeIc)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.coffeeIc)).check(matches(isDisplayed()));
         onView(withId(R.id.welcomeTextView)).check(matches(isDisplayed()));
     }
 
@@ -55,11 +59,12 @@ public class InputEmailActivityTest {
      */
     @Test
     public void Test0() {
-        onView(withId(R.id.connectingStatus)).check(matches(not(isDisplayed())));
-        checkPermanentViews();
-        onView(withId(R.id.inputEmailEditText)).check(matches(isDisplayed()));
-        onView(withId(R.id.inputEmailEditText)).check(matches(not(hasErrorText("Error"))));
-        onView(withId(R.id.continueButton)).check(matches(isDisplayed()));
+        inputEmailPage.checkConnectingStatusNotDisplayed()
+                .checkIcon()
+                .checkWelcomeTextView()
+                .checkInputEmail()
+                .checkInputNotError()
+                .checkContinueBtn();
     }
 
     /**
@@ -111,10 +116,11 @@ public class InputEmailActivityTest {
         onView(withId(R.id.inputEmailEditText))
                 .perform(click(),replaceText("venue@ya.ru"), closeSoftKeyboard())
                 .check(matches(isDisplayed()));
-        onView(withId(R.id.continueButton)).perform(click()).check(matches(isDisplayed()));
         onView(withId(R.id.connectingStatus)).check(matches(not(isDisplayed())));
         checkPermanentViews();
-        onView(withId(R.id.inputEmailEditText)).check(matches(not(hasErrorText("Error"))));
+        onView(withId(R.id.continueButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.continueButton)).perform(click());
+        onView(withId(R.id.verificationCodeView)).check(matches(isDisplayed()));
     }
 
     /**
