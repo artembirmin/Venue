@@ -14,13 +14,11 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 /**
@@ -31,11 +29,12 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class InputEmailActivityTest {
 
-    InputEmailPage inputEmailPage = new InputEmailPage();
-
     @Rule
     public ActivityScenarioRule<InputEmailActivity> activityRule =
             new ActivityScenarioRule<InputEmailActivity>(InputEmailActivity.class);
+
+    InputEmailPage inputEmailPage = new InputEmailPage();
+    VerificationCodePage verificationCodePage = new VerificationCodePage();
 
     private void checkPermanentViews() {
         onView(ViewMatchers.withId(R.id.coffeeIc)).check(matches(isDisplayed()));
@@ -59,12 +58,12 @@ public class InputEmailActivityTest {
      */
     @Test
     public void Test0() {
-        inputEmailPage.checkConnectingStatusNotDisplayed()
-                .checkIcon()
-                .checkWelcomeTextView()
-                .checkInputEmail()
-                .checkInputNotError()
-                .checkContinueBtn();
+        inputEmailPage.isConnectingStatusNotDisplayed()
+                .isIconDisplayed()
+                .isWelcomeTextViewDisplayed()
+                .isInputEmailDisplayed()
+                .isInputNotErrorDisplayed()
+                .isContinueBtnDisplayed();
     }
 
     /**
@@ -86,12 +85,12 @@ public class InputEmailActivityTest {
      */
     @Test
     public void Test1() {
-        onView(withId(R.id.inputEmailEditText))
-                .perform(click(),replaceText("mfomd7345gh678hgfd876tfg6"), closeSoftKeyboard());
-        onView(withId(R.id.continueButton)).perform(click()).check(matches(isDisplayed()));
-        onView(withId(R.id.connectingStatus)).check(matches(not(isDisplayed())));
-        checkPermanentViews();
-        onView(withId(R.id.inputEmailEditText)).check(matches(hasErrorText("Error")));
+        inputEmailPage.setTextInputEmail("mfomd7345gh678hgfd876tfg6")
+                .isConnectingStatusNotDisplayed()
+                .isIconDisplayed()
+                .isWelcomeTextViewDisplayed()
+                .isInputEmailDisplayed()
+                .isContinueBtnDisplayed();
     }
 
     /**
@@ -113,14 +112,15 @@ public class InputEmailActivityTest {
      */
     @Test
     public void Test2() {
-        onView(withId(R.id.inputEmailEditText))
-                .perform(click(),replaceText("venue@ya.ru"), closeSoftKeyboard())
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.connectingStatus)).check(matches(not(isDisplayed())));
-        checkPermanentViews();
-        onView(withId(R.id.continueButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.continueButton)).perform(click());
-        onView(withId(R.id.verificationCodeView)).check(matches(isDisplayed()));
+        inputEmailPage.setTextInputEmail("venue@ya.ru")
+                .closeKeyboard()
+                .isConnectingStatusNotDisplayed()
+                .isIconDisplayed()
+                .isWelcomeTextViewDisplayed()
+                .isInputEmailDisplayed()
+                .isContinueBtnDisplayed()
+                .clickContinueBtn();
+        verificationCodePage.isPageDisplayed();
     }
 
     /**
@@ -134,13 +134,23 @@ public class InputEmailActivityTest {
      */
     @Test
     public void Test3() {
-        onView(withId(R.id.inputEmailEditText))
-                .perform(typeText("venue@"), closeSoftKeyboard())
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.continueButton)).perform(click()).check(matches(isDisplayed()));
-        onView(withId(R.id.connectingStatus)).check(matches(not(isDisplayed())));
-        checkPermanentViews();
-        onView(withId(R.id.inputEmailEditText)).check(matches(not(hasErrorText("Error"))));
+        inputEmailPage.setTextInputEmail("venue@")
+                .closeKeyboard()
+                .isInputEmailDisplayed()
+                .isConnectingStatusNotDisplayed()
+                .isIconDisplayed()
+                .isWelcomeTextViewDisplayed()
+                .isContinueBtnDisplayed()
+                .clickContinueBtn()
+                .isInputErroDisplayed();
+
+//        onView(withId(R.id.inputEmailEditText))
+//                .perform(typeText("venue@"), closeSoftKeyboard())
+//                .check(matches(isDisplayed()));
+//        onView(withId(R.id.continueButton)).perform(click()).check(matches(isDisplayed()));
+//        onView(withId(R.id.connectingStatus)).check(matches(not(isDisplayed())));
+//        checkPermanentViews();
+//        onView(withId(R.id.inputEmailEditText)).check(matches(not(hasErrorText("Error"))));
     }
 
     /**

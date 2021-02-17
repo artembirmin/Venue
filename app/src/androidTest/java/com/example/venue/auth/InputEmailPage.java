@@ -22,7 +22,7 @@ public class InputEmailPage extends BasePage implements Page {
     /**
      * Icon
      */
-    public InputEmailPage checkIcon() {
+    public InputEmailPage isIconDisplayed() {
         checkViewDisplayed(icon);
         return this;
     }
@@ -30,7 +30,7 @@ public class InputEmailPage extends BasePage implements Page {
     /**
      * ContinueBtn
      */
-    public InputEmailPage checkContinueBtn() {
+    public InputEmailPage isContinueBtnDisplayed() {
         checkViewDisplayed(continueBtn);
         return this;
     }
@@ -43,12 +43,12 @@ public class InputEmailPage extends BasePage implements Page {
     /**
      * InputEmail
      */
-    public InputEmailPage checkInputEmail() {
+    public InputEmailPage isInputEmailDisplayed() {
         clickView(inputEmailEditText);
         return this;
     }
 
-    public InputEmailPage checkInputError() {
+    public InputEmailPage isInputErroDisplayed() {
         onView(withId(R.id.inputEmailEditText))
                 .check(matches(hasErrorText(
                         App.getInstance()
@@ -58,7 +58,7 @@ public class InputEmailPage extends BasePage implements Page {
         return this;
     }
 
-    public InputEmailPage checkInputNotError() {
+    public InputEmailPage isInputNotErrorDisplayed() {
         onView(withId(R.id.inputEmailEditText))
                 .check(matches(not(hasErrorText(
                         App.getInstance()
@@ -68,15 +68,25 @@ public class InputEmailPage extends BasePage implements Page {
         return this;
     }
 
+    public InputEmailPage setTextInputEmail(String text) {
+        setText(inputEmailEditText, text);
+        return this;
+    }
+
+    public InputEmailPage closeKeyboard() {
+        closeKeyboard(inputEmailEditText);
+        return this;
+    }
+
     /**
      * ConnectingStatus
      */
-    public InputEmailPage checkConnectingStatus() {
+    public InputEmailPage isConnectingStatusDisplayed() {
         checkViewDisplayed(connectingStatus);
         return this;
     }
 
-    public InputEmailPage checkConnectingStatusNotDisplayed() {
+    public InputEmailPage isConnectingStatusNotDisplayed() {
         checkViewNotDisplayed(connectingStatus);
         return this;
     }
@@ -84,7 +94,7 @@ public class InputEmailPage extends BasePage implements Page {
     /**
      * WelcomeTextView
      */
-    public InputEmailPage checkWelcomeTextView() {
+    public InputEmailPage isWelcomeTextViewDisplayed() {
         checkViewDisplayed(welcomeTextView);
         return this;
     }

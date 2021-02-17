@@ -20,7 +20,7 @@ public class VerificationCodeActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_activity_verification_code);
-        verificationCodeView = findViewById(R.id.verificationCodeView);
+        verificationCodeView = findViewById(R.id.verificationCodeEditText);
         verificationCodeView.setFocusable(true);
         showSoftKeyboard(verificationCodeView);
     }
