@@ -52,7 +52,6 @@ public class InputEmailActivity extends BaseActivity
             else connect.setVisibility(TextView.VISIBLE);
         }));
 
-
         continueButton.setOnClickListener(v -> {
             String email = Objects.requireNonNull(emailEditText.getText()).toString();
             boolean verificationResult = emailVerification(email);
@@ -60,7 +59,7 @@ public class InputEmailActivity extends BaseActivity
                 textInputLayout.setErrorEnabled(false);
                 presenter.onContinueButtonClick(email);
             } else {
-                emailEditText.setError("Error");
+                emailEditText.setError(getResources().getString(R.string.input_error_msg));
                 textInputLayout.setErrorEnabled(true);
             }
         });
