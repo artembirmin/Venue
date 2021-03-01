@@ -1,7 +1,8 @@
 package com.example.venue.auth;
 
-import com.example.venue.App;
+
 import com.example.venue.R;
+import com.example.venue.application.App;
 import com.example.venue.base.BasePage;
 import com.example.venue.base.Page;
 

@@ -6,9 +6,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 public abstract class BasePresenter {
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    protected void addDisposable(Disposable disposable){
+    protected void addDisposable(Disposable disposable) {
         compositeDisposable.add(disposable);
     }
 

@@ -1,9 +1,12 @@
 package com.example.venue.auth;
 
+import androidx.appcompat.widget.ResourceManagerInternal;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.example.venue.presentation.inputemail.InputEmailActivity;
+import com.example.venue.R;
+import com.example.venue.application.App;
+import com.example.venue.presentation.userstories.auth.inputemail.view.InputEmailActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
