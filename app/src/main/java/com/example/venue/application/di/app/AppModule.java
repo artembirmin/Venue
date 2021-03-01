@@ -42,7 +42,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AppRouter provideAppRouter(){
+    AppRouter provideAppRouter() {
         return new AppRouter();
     }
 }

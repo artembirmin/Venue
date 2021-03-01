@@ -6,7 +6,7 @@ import ru.terrakok.cicerone.commands.Forward;
 
 public class AppRouter extends Router {
 
-    public void navigateWithMessage(Screen screen, String message){
+    public void navigateWithMessage(Screen screen, String message) {
         executeCommands(new Forward(screen));
 
     }

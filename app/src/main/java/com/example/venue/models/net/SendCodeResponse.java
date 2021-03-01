@@ -9,11 +9,11 @@ public class SendCodeResponse {
         this.code = code;
     }
 
-    public void setResponse(String response) {
+    public SendCodeResponse(String response) {
         this.response = response;
     }
 
-    public SendCodeResponse(String response) {
+    public void setResponse(String response) {
         this.response = response;
     }
 

@@ -3,8 +3,6 @@ package com.example.venue.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.venue.presentation.userstories.auth.verificationcode.VerificationCodeActivity;
 
 import ru.terrakok.cicerone.android.support.SupportAppScreen;

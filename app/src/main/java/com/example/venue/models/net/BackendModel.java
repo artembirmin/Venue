@@ -8,12 +8,10 @@ import java.util.ArrayList;
 
 public class BackendModel {
 
-    @SerializedName("name")
-    private String name;
-
     @SerializedName("weather")
     private final ArrayList<WeatherItem> weather = new ArrayList<WeatherItem>();
-
+    @SerializedName("name")
+    private String name;
     @SerializedName("main")
     private Main main;
 

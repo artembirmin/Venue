@@ -14,21 +14,19 @@ import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.Router;
 
 public class App extends Application {
 
     private static final String TAG = "App";
     public static App instance;
-    private AppComponent appComponent;
-    private Cicerone<AppRouter> cicerone;
-
     @Inject
     IntentFilter intentFilter;
     @Inject
     NetworkChangeReceiver networkChangeReceiver;
     @Inject
     AppRouter appRouter;
+    private AppComponent appComponent;
+    private Cicerone<AppRouter> cicerone;
 
     public static App getInstance() {
         return instance;
@@ -52,7 +50,7 @@ public class App extends Application {
         return cicerone.getRouter();
     }
 
-    public NetworkChangeReceiver getNetworkChangeReceiver(){
+    public NetworkChangeReceiver getNetworkChangeReceiver() {
         return networkChangeReceiver;
     }
 

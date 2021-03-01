@@ -20,7 +20,7 @@ public class AuthorizationNetworkService implements AuthorizationApiProvider {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-       // authorizationApi = retrofit.create(AuthorizationApi.class);
+        // authorizationApi = retrofit.create(AuthorizationApi.class);
         authorizationApi = new AuthorizationApiMock();
     }
 

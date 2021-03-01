@@ -9,6 +9,6 @@ public class AuthorizationApiMock implements AuthorizationApi {
 
     @Override
     public Single<SendCodeResponse> sendVerificationCode(SendCodeRequest sendCodeRequest) {
-        return Single.just(new SendCodeResponse("Ok", (int) (Math.random()*10000)));
+        return Single.just(new SendCodeResponse("Ok", (int) (Math.random() * 10000)));
     }
 }

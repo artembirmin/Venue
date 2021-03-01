@@ -36,12 +36,12 @@ public class InputEmailActivity extends BaseActivity
     private static final String TAG = InputEmailActivity.class.getSimpleName();
     @Inject
     InputEmailPresenter presenter;
-    private Pattern emailPattern = Pattern.compile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}");
+    private final Pattern emailPattern = Pattern.compile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}");
     private TextInputLayout textInputLayout;
     private TextInputEditText emailEditText;
     private Button continueButton;
     private TextView connect; //FIXME Имя сделай
-    private Navigator navigator = new SupportAppNavigator(this, R.id.container);
+    private final Navigator navigator = new SupportAppNavigator(this, R.id.container);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //TODO Красоту навести
