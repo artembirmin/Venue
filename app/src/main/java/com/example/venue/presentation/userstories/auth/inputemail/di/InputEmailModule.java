@@ -8,6 +8,7 @@ import com.example.venue.application.di.scopes.PerActivity;
 import com.example.venue.business.repositories.auth.AuthorizationRepository;
 import com.example.venue.business.repositories.auth.AuthorizationRepositoryImpl;
 import com.example.venue.data.network.auth.AuthorizationApi;
+import com.example.venue.presentation.navigation.AppRouter;
 import com.example.venue.presentation.userstories.auth.inputemail.interactor.InputEmailInteractor;
 import com.example.venue.presentation.userstories.auth.inputemail.interactor.InputEmailInteractorImpl;
 import com.example.venue.presentation.userstories.auth.inputemail.presenter.InputEmailPresenter;
@@ -20,22 +21,16 @@ import dagger.Provides;
 @Module
 public class InputEmailModule {
 
-    InputEmailView view;
-
-    public InputEmailModule(InputEmailView view) {
-        this.view = view;
+    @PerActivity
+    @Provides
+    InputEmailPresenter provideInputEmailPresenter(InputEmailInteractor interactor, AppRouter router) {
+        return new InputEmailPresenterImpl(interactor, router);
     }
 
     @PerActivity
     @Provides
-    InputEmailPresenter provideInputEmailPresenter(InputEmailInteractor interactor) {
-        return new InputEmailPresenterImpl(interactor);
-    }
-
-    @PerActivity
-    @Provides
-    LinearLayoutManager provideLinearLayoutManager() {
-        return new LinearLayoutManager((Context) view);
+    LinearLayoutManager provideLinearLayoutManager(Context context) {
+        return new LinearLayoutManager(context);
     }
 
     @PerActivity

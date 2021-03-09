@@ -1,4 +1,4 @@
-package com.example.venue.application.di.app;
+package com.example.venue.application.di.app.modules;
 
 import dagger.Module;
 

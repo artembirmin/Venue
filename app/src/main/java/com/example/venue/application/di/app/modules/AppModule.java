@@ -1,4 +1,4 @@
-package com.example.venue.application.di.app;
+package com.example.venue.application.di.app.modules;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -38,11 +38,5 @@ public class AppModule {
     @Singleton
     NetworkChangeReceiver provideNetworkChangeReceiver() {
         return new NetworkChangeReceiver(BehaviorSubject.create());
-    }
-
-    @Provides
-    @Singleton
-    AppRouter provideAppRouter() {
-        return new AppRouter();
     }
 }

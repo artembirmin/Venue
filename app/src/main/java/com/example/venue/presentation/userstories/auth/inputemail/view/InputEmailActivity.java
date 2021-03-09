@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.venue.R;
 import com.example.venue.application.App;
+import com.example.venue.application.di.app.modules.NavigationModule;
 import com.example.venue.presentation.base.BaseActivity;
 import com.example.venue.presentation.userstories.auth.inputemail.di.DaggerInputEmailComponent;
 import com.example.venue.presentation.userstories.auth.inputemail.di.InputEmailModule;
@@ -28,6 +29,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class InputEmailActivity extends BaseActivity
@@ -36,6 +38,8 @@ public class InputEmailActivity extends BaseActivity
     private static final String TAG = InputEmailActivity.class.getSimpleName();
     @Inject
     InputEmailPresenter presenter;
+    @Inject
+    NavigatorHolder navigatorHolder;
     private final Pattern emailPattern = Pattern.compile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}");
     private TextInputLayout textInputLayout;
     private TextInputEditText emailEditText;
@@ -47,7 +51,7 @@ public class InputEmailActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) { //TODO Красоту навести
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_activity_input_email);
-        buildActivityComponentAndInject();
+        inject();
         presenter.attachView(this);
         findViews();
         addDisposable(App.getInstance().getNetworkChangeReceiver().getBehaviorSubject().subscribe(isConnect -> {
@@ -60,10 +64,10 @@ public class InputEmailActivity extends BaseActivity
         emailEditText.setOnKeyListener(this::onEnterClick);
     }
 
-    private void onContinueButton() {
+    public void onContinueButton() {
         String email = Objects.requireNonNull(emailEditText.getText()).toString();
-        boolean verificationResult = emailVerification(email);
-        if (verificationResult) {
+        boolean isSuccessfulResult = emailVerification(email);
+        if (isSuccessfulResult) {
             textInputLayout.setErrorEnabled(false);
             presenter.onContinueButtonClick(email);
         } else {
@@ -81,7 +85,7 @@ public class InputEmailActivity extends BaseActivity
         return true;
     }
 
-    private boolean emailVerification(String email) {
+    public boolean emailVerification(String email) {
         return emailPattern.matcher(email).matches();
     }
 
@@ -101,10 +105,11 @@ public class InputEmailActivity extends BaseActivity
         snack.show();
     }
 
-    private void buildActivityComponentAndInject() {
+    @Override
+    protected void inject() {
         DaggerInputEmailComponent.builder()
                 .appComponent(App.getInstance().getAppComponent())
-                .inputEmailModule(new InputEmailModule(this))
+                .inputEmailModule(new InputEmailModule())
                 .build().inject(this);
     }
 
@@ -120,14 +125,19 @@ public class InputEmailActivity extends BaseActivity
     }
 
     @Override
+    public void makeToast(int message) {
+        Toast.makeText(this, this.getString(message), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        App.getInstance().getNavigatorHolder().setNavigator(navigator);
+        navigatorHolder.setNavigator(navigator);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        App.getInstance().getNavigatorHolder().removeNavigator();
+        navigatorHolder.removeNavigator();
     }
 }

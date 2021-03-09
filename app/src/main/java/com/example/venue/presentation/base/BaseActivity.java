@@ -1,6 +1,9 @@
 package com.example.venue.presentation.base;
 
+import android.os.Bundle;
+
 import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -14,10 +17,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         compositeDisposable.add(disposable);
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        inject();
+        super.onCreate(savedInstanceState);
+    }
+
+    protected abstract void inject();
 
     @CallSuper
     public void onStop() {
-        compositeDisposable.clear();
         super.onStop();
+        compositeDisposable.clear();
     }
 }

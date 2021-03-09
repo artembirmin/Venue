@@ -16,6 +16,9 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         this.behaviorSubject = behaviorSubject;
     }
 
+    public NetworkChangeReceiver() {
+    }
+
     public BehaviorSubject<Boolean> getBehaviorSubject() {
         return behaviorSubject;
     }

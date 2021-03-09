@@ -1,4 +1,4 @@
-package com.example.venue.application.di.app;
+package com.example.venue.application.di.app.modules;
 
 import com.example.venue.data.network.auth.AuthorizationApi;
 import com.example.venue.data.network.auth.AuthorizationNetworkService;

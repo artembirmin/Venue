@@ -10,6 +10,5 @@ public interface InputEmailPresenter {
 
     void onContinueButtonClick(String email);
 
-
     void onStop();
 }

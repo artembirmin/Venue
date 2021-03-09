@@ -1,5 +1,6 @@
 package com.example.venue.presentation.userstories.auth.inputemail.presenter;
 
+import com.example.venue.R;
 import com.example.venue.application.App;
 import com.example.venue.models.net.SendCodeRequest;
 import com.example.venue.presentation.base.BasePresenter;
@@ -18,9 +19,9 @@ public class InputEmailPresenterImpl extends BasePresenter implements InputEmail
     InputEmailView activity;
     AppRouter router;
 
-    public InputEmailPresenterImpl(InputEmailInteractor interactor) {
+    public InputEmailPresenterImpl(InputEmailInteractor interactor, AppRouter router) {
         this.interactor = interactor;
-        router = App.getInstance().getRouter();
+        this.router = router;
     }
 
     @Override
@@ -43,10 +44,9 @@ public class InputEmailPresenterImpl extends BasePresenter implements InputEmail
                         .subscribe(sendCodeResponse -> {
                                     activity.makeToast(String.valueOf(sendCodeResponse.getCode()));
                                     router.navigateTo(new Screens.VerificationCodeScreen());
-
                                 },
                                 throwable -> {
-                                    activity.makeToast("Что-то пошло не так :(");
+                                    activity.makeToast(R.string.something_went_wrong);
                                 })
         );
     }
