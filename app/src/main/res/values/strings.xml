@@ -3,4 +3,5 @@
     <string name="email">Email</string>
     <string name="continue_btn">Continue</string>
     <string name="input_error_msg">Error</string>
+    <string name="something_went_wrong">Что-то пошло не так :(</string>
 </resources>
