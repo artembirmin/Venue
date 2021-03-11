@@ -10,5 +10,5 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = {InputEmailModule.class})
 @PerActivity
 public interface InputEmailComponent {
-    void inject(InputEmailActivity calculatorsListActivity);
+    void inject(InputEmailActivity inputEmailActivity);
 }

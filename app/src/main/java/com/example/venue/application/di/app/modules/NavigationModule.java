@@ -1,6 +1,5 @@
 package com.example.venue.application.di.app.modules;
 
-import com.example.venue.application.App;
 import com.example.venue.presentation.navigation.AppRouter;
 
 import javax.inject.Singleton;
@@ -16,13 +15,13 @@ public class NavigationModule {
 
     @Provides
     @Singleton
-    public AppRouter provideAppRouter(){
+    public AppRouter provideAppRouter() {
         return cicerone.getRouter();
     }
 
     @Provides
     @Singleton
-    public NavigatorHolder provideNavigatorHolder(){
+    public NavigatorHolder provideNavigatorHolder() {
         return cicerone.getNavigatorHolder();
     }
 }

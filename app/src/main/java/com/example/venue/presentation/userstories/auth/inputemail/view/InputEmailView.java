@@ -6,4 +6,8 @@ public interface InputEmailView {
     void makeToast(String message);
 
     void makeToast(int message);
+
+    void onConnectionRestored();
+
+    void onConnectionLost();
 }

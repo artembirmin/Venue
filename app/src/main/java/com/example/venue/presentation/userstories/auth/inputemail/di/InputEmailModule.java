@@ -13,7 +13,6 @@ import com.example.venue.presentation.userstories.auth.inputemail.interactor.Inp
 import com.example.venue.presentation.userstories.auth.inputemail.interactor.InputEmailInteractorImpl;
 import com.example.venue.presentation.userstories.auth.inputemail.presenter.InputEmailPresenter;
 import com.example.venue.presentation.userstories.auth.inputemail.presenter.InputEmailPresenterImpl;
-import com.example.venue.presentation.userstories.auth.inputemail.view.InputEmailView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -41,7 +40,7 @@ public class InputEmailModule {
 
     @PerActivity
     @Provides
-    AuthorizationRepository provideWeatherApiRepository(AuthorizationApi authorizationApi) {
+    AuthorizationRepository provideAuthorizationRepository(AuthorizationApi authorizationApi) {
         return new AuthorizationRepositoryImpl(authorizationApi);
     }
 }

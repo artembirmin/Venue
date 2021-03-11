@@ -5,13 +5,12 @@ import com.example.venue.models.net.SendCodeRequest;
 import com.example.venue.models.net.SendCodeResponse;
 
 import io.reactivex.Single;
-import retrofit2.Retrofit;
 
 public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
     private static final String TAG = "AuthorizationApiProvider";
-    AuthorizationApi authorizationApi;
-    private Retrofit retrofit;
+
+    private final AuthorizationApi authorizationApi;
 
     public AuthorizationRepositoryImpl(AuthorizationApi authorizationApi) {
         this.authorizationApi = authorizationApi;

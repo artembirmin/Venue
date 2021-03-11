@@ -1,13 +1,16 @@
 package com.example.venue.auth;
 
-import androidx.appcompat.widget.ResourceManagerInternal;
+import android.content.Context;
+import android.net.wifi.WifiManager;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.venue.R;
-import com.example.venue.application.App;
 import com.example.venue.presentation.userstories.auth.inputemail.view.InputEmailActivity;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +46,7 @@ public class InputEmailActivityTest {
      * Ключ: nyh5km4fu9p1w0nkm
      */
     @Test
-    public void Test0() {
+    public void test0() {
         inputEmailPage.isConnectingStatusNotDisplayed()
                 .isIconDisplayed()
                 .isWelcomeTextViewDisplayed()
@@ -70,7 +73,7 @@ public class InputEmailActivityTest {
      * Ключ: 2kgp7eyx15k0tq6nn
      */
     @Test
-    public void Test1() {
+    public void test1() {
         inputEmailPage.setTextInputEmail("mfomd7345gh678hgfd876tfg6")
                 .isConnectingStatusNotDisplayed()
                 .isIconDisplayed()
@@ -98,7 +101,7 @@ public class InputEmailActivityTest {
      * Ключ: 8tzlmm892fawdmbi6
      */
     @Test
-    public void Test2() {
+    public void test2() {
         inputEmailPage.setTextInputEmail("venue@ya.ru")
                 .closeKeyboard()
                 .isConnectingStatusNotDisplayed()
@@ -128,7 +131,7 @@ public class InputEmailActivityTest {
      * Ключ:
      */
     @Test
-    public void Test3() {
+    public void test3() {
         inputEmailPage.setTextInputEmail("venue@")
                 .closeKeyboard()
                 .isConnectingStatusNotDisplayed()
@@ -158,7 +161,7 @@ public class InputEmailActivityTest {
      * Ключ:
      */
     @Test
-    public void Test4() {
+    public void test4() {
         inputEmailPage.setTextInputEmail("venue@gmail")
                 .closeKeyboard()
                 .isConnectingStatusNotDisplayed()
@@ -188,7 +191,7 @@ public class InputEmailActivityTest {
      * Ключ:
      */
     @Test
-    public void Test5() {
+    public void test5() {
         inputEmailPage.setTextInputEmail("venue@gmail.")
                 .closeKeyboard()
                 .isConnectingStatusNotDisplayed()
@@ -218,7 +221,7 @@ public class InputEmailActivityTest {
      * Ключ:
      */
     @Test
-    public void Test6() {
+    public void test6() {
         inputEmailPage.setTextInputEmail("venue@gmail.c")
                 .closeKeyboard()
                 .isConnectingStatusNotDisplayed()
@@ -234,5 +237,4 @@ public class InputEmailActivityTest {
     public void Test7() {
 
     }
-
 }

@@ -15,9 +15,9 @@ import io.reactivex.schedulers.Schedulers;
 public class InputEmailPresenterImpl extends BasePresenter implements InputEmailPresenter {
 
     private static final String TAG = "CalculatorListPresenter";
-    InputEmailInteractor interactor;
-    InputEmailView activity;
-    AppRouter router;
+    private final InputEmailInteractor interactor;
+    private final AppRouter router;
+    private InputEmailView view;
 
     public InputEmailPresenterImpl(InputEmailInteractor interactor, AppRouter router) {
         this.interactor = interactor;
@@ -26,12 +26,21 @@ public class InputEmailPresenterImpl extends BasePresenter implements InputEmail
 
     @Override
     public void attachView(InputEmailView activity) {
-        this.activity = activity;
+        this.view = activity;
+        subscribeOnReceivers();
+    }
+
+    private void subscribeOnReceivers() {
+        addDisposable(App.getInstance().getNetworkChangeReceiver().getBehaviorSubject().subscribe(isConnected -> {
+            if (isConnected)
+                view.onConnectionRestored();
+            else view.onConnectionLost();
+        }));
     }
 
     @Override
     public void detachView() {
-        activity = null;
+        view = null;
     }
 
     @Override
@@ -42,11 +51,11 @@ public class InputEmailPresenterImpl extends BasePresenter implements InputEmail
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(sendCodeResponse -> {
-                                    activity.makeToast(String.valueOf(sendCodeResponse.getCode()));
+                                    view.makeToast(String.valueOf(sendCodeResponse.getCode()));
                                     router.navigateTo(new Screens.VerificationCodeScreen());
                                 },
                                 throwable -> {
-                                    activity.makeToast(R.string.something_went_wrong);
+                                    view.makeToast(R.string.something_went_wrong);
                                 })
         );
     }

@@ -28,12 +28,12 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         int status = NetworkUtil.getConnectivityStatusString(context);
         Log.d(TAG, "on network receiver");
         if ("android.net.conn.CONNECTIVITY_CHANGE".equals(intent.getAction())) {
-            if (status == NetworkUtil.NETWORK_STATUS_NOT_CONNECTED) {
-                Log.d(TAG, "onReceive: false");
-                behaviorSubject.onNext(false);
-            } else {
+            if (status != NetworkUtil.NETWORK_STATUS_NOT_CONNECTED) {
                 Log.d(TAG, "onReceive: true");
                 behaviorSubject.onNext(true);
+            } else {
+                Log.d(TAG, "onReceive: false");
+                behaviorSubject.onNext(false);
             }
         }
     }

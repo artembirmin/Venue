@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import androidx.annotation.NonNull;
 
 import com.example.venue.application.broadcastreceivers.NetworkChangeReceiver;
-import com.example.venue.presentation.navigation.AppRouter;
 
 import javax.inject.Singleton;
 

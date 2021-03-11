@@ -9,7 +9,7 @@ import io.reactivex.Single;
 
 public class InputEmailInteractorImpl implements InputEmailInteractor {
 
-    AuthorizationRepository repository;
+    private final AuthorizationRepository repository;
 
     public InputEmailInteractorImpl(AuthorizationRepository repository) {
         this.repository = repository;

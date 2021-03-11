@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.venue.R;
 import com.example.venue.application.App;
-import com.example.venue.application.di.app.modules.NavigationModule;
 import com.example.venue.presentation.base.BaseActivity;
 import com.example.venue.presentation.userstories.auth.inputemail.di.DaggerInputEmailComponent;
 import com.example.venue.presentation.userstories.auth.inputemail.di.InputEmailModule;
@@ -36,32 +35,26 @@ public class InputEmailActivity extends BaseActivity
         implements InputEmailView {
 
     private static final String TAG = InputEmailActivity.class.getSimpleName();
+    private final Pattern emailPattern = Pattern.compile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}");
+    private final Navigator navigator = new SupportAppNavigator(this, R.id.container);
     @Inject
     InputEmailPresenter presenter;
     @Inject
     NavigatorHolder navigatorHolder;
-    private final Pattern emailPattern = Pattern.compile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}");
     private TextInputLayout textInputLayout;
     private TextInputEditText emailEditText;
     private Button continueButton;
-    private TextView connect; //FIXME Имя сделай
-    private final Navigator navigator = new SupportAppNavigator(this, R.id.container);
+    private TextView connectStatusTextView; //FIXME Имя сделай
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //TODO Красоту навести
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_activity_input_email);
         inject();
-        presenter.attachView(this);
         findViews();
-        addDisposable(App.getInstance().getNetworkChangeReceiver().getBehaviorSubject().subscribe(isConnect -> {
-            if (isConnect)
-                connect.setVisibility(TextView.INVISIBLE);
-            else connect.setVisibility(TextView.VISIBLE);
-        }));
-
         continueButton.setOnClickListener(v -> onContinueButton());
         emailEditText.setOnKeyListener(this::onEnterClick);
+        presenter.attachView(this);
     }
 
     public void onContinueButton() {
@@ -75,6 +68,7 @@ public class InputEmailActivity extends BaseActivity
             textInputLayout.setErrorEnabled(true);
         }
     }
+
 
     private boolean onEnterClick(View v, int keyCode, KeyEvent keyEvent) {
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -93,7 +87,7 @@ public class InputEmailActivity extends BaseActivity
         emailEditText = findViewById(R.id.inputEmailEditText);
         textInputLayout = findViewById(R.id.emailTextInputLayout);
         continueButton = findViewById(R.id.continueButton);
-        connect = findViewById(R.id.connectingStatus);
+        connectStatusTextView = findViewById(R.id.connectingStatus);
     }
 
     private void showSnackbar() {
@@ -127,6 +121,16 @@ public class InputEmailActivity extends BaseActivity
     @Override
     public void makeToast(int message) {
         Toast.makeText(this, this.getString(message), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onConnectionRestored() {
+        connectStatusTextView.setVisibility(TextView.INVISIBLE);
+    }
+
+    @Override
+    public void onConnectionLost() {
+        connectStatusTextView.setVisibility(TextView.VISIBLE);
     }
 
     @Override

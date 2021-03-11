@@ -6,14 +6,11 @@ import android.util.Log;
 
 import com.example.venue.application.broadcastreceivers.NetworkChangeReceiver;
 import com.example.venue.application.di.app.AppComponent;
-import com.example.venue.application.di.app.modules.AppModule;
 import com.example.venue.application.di.app.DaggerAppComponent;
-import com.example.venue.presentation.navigation.AppRouter;
+import com.example.venue.application.di.app.modules.AppModule;
 
 import javax.inject.Inject;
 
-import ru.terrakok.cicerone.Cicerone;
-import ru.terrakok.cicerone.NavigatorHolder;
 
 public class App extends Application {
 
